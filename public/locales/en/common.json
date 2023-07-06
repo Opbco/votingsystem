@@ -1,0 +1,189 @@
+{
+    "Welcome": {
+        "text": "Welcome to this React Internationalization App magic",
+        "description": "This app aims to help bridge the gap and help you easily internationalize your web page easily"
+    },
+    "interpolation_pluralization": {
+        "text_one": "There is only one Article on this",
+        "text_other": "There are {{count}} Articles on this"
+    },
+    "sermon": {
+        "title": "Sermons",
+        "message_from_category": "Message from {{from}}. {{when}}. Category: {{category}}"
+    },
+    "date": "Today is {{date, DATE_HUGE}}",
+    "membre": "Member",
+    "membre_profile": "Member's profile",
+    "logout": "Log out",
+    "profile": "Profile",
+    "register": "Registration",
+    "featured_pastors": "Featured members",
+    "login": "Log In",
+    "home": "Home",
+    "whatsapp": "WhatsApp Number",
+    "phone": "Phone number",
+    "title": "Title",
+    "firstname": "First name",
+    "lastName": "Last Name",
+    "nationality": "Nationality",
+    "bp": "P.O",
+    "prev": "Prev",
+    "next": "Next",
+    "description": {
+        "group": "Description",
+        "label": "Let's Talk about you"
+    },
+    "membre_personnal": "Personnal Information",
+    "membre_professional": "Professional Information",
+    "user": {
+        "profile": "Profile",
+        "update_password": "Update password"
+    },
+    "maritalStatus": {
+        "label": "Marital Status",
+        "status": "Status",
+        "maried": "Maried",
+        "select": "Select...",
+        "single": "Single",
+        "widow": "Widow",
+        "divorced": "Divorced"
+    },
+    "gender": {
+        "label": "Gender",
+        "male": "Male",
+        "select": "Select...",
+        "female": "Female",
+        "other": "Other"
+    },
+    "conjoint": {
+        "name": "Full Name",
+        "fonction": "Profession",
+        "contact": "Contact",
+        "adress": "Address",
+        "nbreEnfant": "Number of children"
+    },
+    "family": {
+        "label": "Parents",
+        "ethnie": "Ethnic",
+        "fatherName": "Father's name",
+        "motherName": "Mother's name"
+    },
+    "handicap": "Any handicap",
+    "address": "Address",
+    "profession": "Profession or Occupation",
+    "consecration": {
+        "label": "Consecration",
+        "paroisse": "Church of consecration",
+        "date": "Date of consecration"
+    },
+    "submit": "Submit",
+    "print": "Print",
+    "save": {
+        "error": "Something went wrong while trying to update your information",
+        "success": "Information successfully saved",
+        "label": "Saving your infomation",
+        "question": "Do you want to save the changes?",
+        "btn": "Save"
+    },
+    "structure": {
+        "add": "Add",
+        "name": "Structure",
+        "date_assumption": "Assumption date",
+        "continent": "Continent",
+        "country": "Country",
+        "state": "State",
+        "division": "Division",
+        "subdivision": "Sub-division",
+        "function": "Position",
+        "actions": "Actions",
+        "status": "Status",
+        "select": "Select...",
+        "errorfecth": "Error while fetching data, please reload the page"
+    },
+    "delete": {
+        "question": "Do you really want to delete?",
+        "btn": "Delete",
+        "label": "Deleting an item",
+        "successStrucuture": "Job position successfully deleted"
+    },
+    "status": {
+        "select": "Select...",
+        "encours": "On going",
+        "mute": "Transfert",
+        "retraite": "Retired",
+        "remplace": "Replaced"
+    },
+    "membre_position": "Position and structure form",
+    "contact": {
+        "title": "Contact Us",
+        "name": "Full Name",
+        "name_place_holder": "Put in your name...",
+        "contacts": "Contacts",
+        "contacts_place_holder": "Put in your phone, whatsapp, ...",
+        "from": "Your email address",
+        "from_place_holder": "Put in your email address...",
+        "subject": "Subject",
+        "subject_place_holder": "Enter a subject...",
+        "message": "Message",
+        "submit": "Send",
+        "label": "Status of the message",
+        "success": "Mail successfully sent",
+        "error": "Something went wrong while trying to send your mail. try again later"
+    },
+    "read_more": "Read More",
+    "upcoming_events": "Upcoming Events",
+    "our_staff": "Administration staff",
+    "footer": {
+        "words_church": "For the word of God is living and active. Sharper than any double-edged sword, it penetrates even to dividing soul and spirit, joints and marrow; it judges the thoughts and attitudes.",
+        "about_church": "About ISABEE",
+        "quick_links": "Quick links",
+        "recent_sermons": "UEb",
+        "our_address": "Our Address",
+        "Connect": "Connect",
+        "all_right_reserved": "All rights reserved"
+    },
+    "departement": {
+        "label": "Departments",
+        "fsba": "Basic and Applied Fundamental Sciences",
+        "aesh": "Agriculture, Livestock and Fisheries Sciences",
+        "erpe": "Renewable Energies and Energy Performance",
+        "esva": "Economy, Rural Sociology and Agricultural Extension",
+        "fstb": "Forestry, Wood Science and Technology",
+        "gh": "Housing Engineering",
+        "gr": "Agricultural Engineering",
+        "hste": "Hydraulics, Water Sciences and Technologies",
+        "mc": "Meteorology and Climatology",
+        "se": "Environmental Sciences"
+    },
+    "infor_exam_session": "Information about the examination",
+    "infor_personnelle": "Personnal information",
+    "infor_diplome_requi": "Information about the required diplomas",
+    "concours": {
+        "label": "Examination Entrance",
+        "admission": "Admission Requirements",
+        "communique": "Communiqué",
+        "inscription": "Registration form",
+        "results": "Results",
+        "first year": "First year",
+        "second year": "Second year",
+        "third year": "Third year",
+        "level": {
+            "title": "Niveau",
+            "select": "Please select the level",
+            "premiere": "First year",
+            "deuxieme": "Second year",
+            "troisieme": "Third year"
+        },
+        "langue": {
+            "title": "Writing language",
+            "select": "Please select the language",
+            "french": "French",
+            "english": "English"
+        },
+        "speciality": "Department",
+        "centres": "Examination center",
+        "nbAttempt": "How many times did you write this examination before?",
+        "divisionOrigin": "Division of origin",
+        "parentsPhones": "Parent's phone number"
+    }
+}

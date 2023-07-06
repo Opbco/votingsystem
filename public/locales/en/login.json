@@ -1,0 +1,12 @@
+{
+    "connection": "Connexion",
+    "rememberme": "Remember me",
+    "username": "User name",
+    "password": "Password",
+    "email": "Email address",
+    "confirm_email": "Confirm email address",
+    "confirm_password": "Confirm password",
+    "name": "Full name",
+    "dob": "Date of birth",
+    "pob": "Place of birth"
+}

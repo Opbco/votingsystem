@@ -1,0 +1,224 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+  locale: en
+  locales: en|fr
+  uploads_dir: "%kernel.project_dir%/public/uploads"
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: "../src/"
+    exclude:
+      - "../src/DependencyInjection/"
+      - "../src/Entity/"
+      - "../src/Kernel.php"
+
+  app.listener.redirect_404_to_homepage:
+    class: App\EventListener\Redirect404ToHomepageListener
+    arguments:
+      - "@router"
+    tags:
+      - {
+          name: kernel.event_listener,
+          event: kernel.exception,
+          method: onKernelException,
+        }
+
+  acme_api.event.authentication_success_listener:
+    class: App\EventListener\AuthenticationSuccessListener
+    tags:
+      - {
+          name: kernel.event_listener,
+          event: lexik_jwt_authentication.on_authentication_success,
+          method: onAuthenticationSuccessResponse,
+        }
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+
+  #sonata admin services
+  admin.continent:
+    class: App\Admin\ContinentAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Continent,
+          controller: ~,
+          manager_type: orm,
+          icon: "fas fa-location-arrow",
+          group: Localisation,
+          label: Continents,
+        }
+
+  admin.country:
+    class: App\Admin\CountryAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Country,
+          controller: ~,
+          manager_type: orm,
+          group: Localisation,
+          label: Countries,
+        }
+
+  admin.state:
+    class: App\Admin\StateAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\State,
+          controller: ~,
+          manager_type: orm,
+          group: Localisation,
+          label: States,
+        }
+
+  admin.departement:
+    class: App\Admin\DepartementAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Departement,
+          controller: ~,
+          manager_type: orm,
+          group: Localisation,
+          label: Divisions,
+        }
+
+  admin.sub_division:
+    class: App\Admin\SubDivisionAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\SubDivision,
+          controller: ~,
+          manager_type: orm,
+          group: Localisation,
+          label: SubDivision,
+        }
+
+  admin.document:
+    class: App\Admin\DocumentAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Document,
+          controller: ~,
+          manager_type: orm,
+          group: Structures,
+          label: Documents,
+        }
+
+  admin.membre:
+    class: App\Admin\MembreAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Membre,
+          controller: ~,
+          manager_type: orm,
+          group: Personnels,
+          icon: "fas fa-people-arrows",
+          label: Membres,
+        }
+
+  admin.candidat:
+    class: App\Admin\CandidatAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+      - [addChild, ["@admin.candidatconcours", "candidat"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Candidat,
+          controller: ~,
+          manager_type: orm,
+          group: Concours,
+          icon: "fas fa-address-card",
+          label: Candidats,
+        }
+  
+  admin.candidatconcours:
+    class: App\Admin\CandidatConcoursAdmin
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\CandidatConcours,
+          controller: ~,
+          manager_type: orm,
+          group: Concours,
+          label: Candidats & Concours,
+        }
+
+  admin.examination:
+    class: App\Admin\ExaminationAdmin
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Examination,
+          controller: ~,
+          manager_type: orm,
+          group: Concours,
+          label: Examinations,
+        }
+  
+  admin.examcenter:
+    class: App\Admin\ExamCenterAdmin
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\ExamCenter,
+          controller: ~,
+          manager_type: orm,
+          group: Concours,
+          label: Examination Centers,
+        }
+  
+  admin.diploma:
+    class: App\Admin\DiplomaAdmin
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Diploma,
+          controller: ~,
+          manager_type: orm,
+          group: Concours,
+          label: Diplomas,
+        }
+  
+  admin.speciality:
+    class: App\Admin\SpecialityAdmin
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Speciality,
+          controller: ~,
+          manager_type: orm,
+          group: Concours,
+          label: Specialities,
+        }

@@ -1,0 +1,188 @@
+{
+    "Welcome": {
+        "text": "Bienvenue sur cette application d'internationalisation React",
+        "description": "Le but de cette application est d'enregistrer tous les pasteurs de l'EPPC"
+    },
+    "interpolation_pluralization": {
+        "text_one": "Il n'y a qu'un seul article à ce sujet",
+        "text_other": "Il y a {{count}} articles sur ce sujet"
+    },
+    "sermon": {
+        "title": "Sermons",
+        "message_from_category": "Message de {{from}}. {{when}}. Categorie: {{category}}"
+    },
+    "date": "Aujourd'hui, nous sommes le {{date, DATE_HUGE}}",
+    "logout": "Se déconnecter",
+    "profile": "Profile",
+    "register": "S'enregistrer",
+    "address": "Adresse",
+    "membre_profile": "Profile du membre",
+    "membre_personnal": "Information personnelle",
+    "whatsapp": "Numéro WhatsApp",
+    "phone": "Numéro de téléphone",
+    "membre_professional": "Information professionelle",
+    "membre": "Membre",
+    "login": "Se connecter",
+    "handicap": "Un handicape??",
+    "title": "Titre",
+    "firstname": "Prénoms",
+    "lastName": "Noms",
+    "nationality": "Nationalité",
+    "bp": "Boite Postale",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "read_more": "Lire plus",
+    "featured_pastors": "Membres en vedette",
+    "description": {
+        "group": "Description",
+        "label": "Parlez de vous"
+    },
+    "home": "Acceuil",
+    "user": {
+        "profile": "Profile",
+        "update_password": "Modifier mot de passe"
+    },
+    "maritalStatus": {
+        "label": "Statut Matrimonial",
+        "status": "Statut",
+        "select": "Sélectionner...",
+        "maried": "Marié(e)",
+        "single": "Célibataire",
+        "widow": "Veuf(ve)",
+        "divorced": "Divorcé(e)"
+    },
+    "gender": {
+        "label": "Genre",
+        "male": "Masculin",
+        "select": "Sélectionner...",
+        "female": "Féminin",
+        "other": "Autre"
+    },
+    "conjoint": {
+        "name": "Nom complet",
+        "fonction": "Profession",
+        "contact": "Contact(s)",
+        "adress": "Adresse",
+        "nbreEnfant": "Nombre d'enfants"
+    },
+    "family": {
+        "label": "Parents",
+        "ethnie": "Ethnie",
+        "fatherName": "Nom du père",
+        "motherName": "Nom de la mère"
+    },
+    "profession": "Profession ou Occupation",
+    "consecration": {
+        "label": "Consecration",
+        "paroisse": "Paroisse de consecration",
+        "date": "Date de consecration"
+    },
+    "submit": "Soumettre",
+    "print": "Imprimer",
+    "save": {
+        "error": "Une erreur inattendue s'est produite, reessayez plutard.",
+        "success": "Informations enregistrees avec succes",
+        "label": "Enregistrement des informations",
+        "question": "Voule vous enregistrer les modifications?",
+        "btn": "Enregistrer"
+    },
+    "structure": {
+        "add": "Ajouter",
+        "name": "Structure",
+        "date_assumption": "Prise de service",
+        "continent": "Continent",
+        "country": "Pays",
+        "state": "Etat",
+        "division": "Departement",
+        "subdivision": "Arrondissement",
+        "function": "Poste",
+        "actions": "Actions",
+        "status": "Statut",
+        "select": "Selectionner...",
+        "errorfecth": "Erreur l'ors du chargement des donnees sur les structures"
+    },
+    "status": {
+        "select": "Selectionner...",
+        "encours": "En cours",
+        "mute": "Mute",
+        "retraite": "Retraite",
+        "remplace": "Remplace"
+    },
+    "delete": {
+        "question": "Voule vous vraiment supprimer?",
+        "btn": "Supprimer",
+        "label": "Suppression d'un élément",
+        "successStrucuture": "Position supprimer avec succe"
+    },
+    "membre_position": "Formulaire position et structure",
+    "contact": {
+        "title": "Nous contacter",
+        "name": "Nom complet",
+        "name_place_holder": "Entrez votre nom...",
+        "contacts": "Contacts",
+        "contacts_place_holder": "Entrez vos numéros téléphone, whatsapp, ...",
+        "from": "Votre adresse email",
+        "from_place_holder": "Entrez votre adresse email...",
+        "subject": "Objet",
+        "subject_place_holder": "Entrez l'objet de votre mail...",
+        "message": "Message",
+        "submit": "Soumettre",
+        "label": "Statut du message",
+        "success": "Message envoyé avec succès",
+        "error": "Une erreur inattendue s'est produite, reessayez plutard."
+    },
+    "upcoming_events": "Evènements importants",
+    "our_staff": "Personnel Administratif",
+    "footer": {
+        "words_church": "Ce site internet vise à informer toutes les communautés sur les offres de formation qu’offre l’institut superieur d’agriculture, du bois, de l’eau et de l’environnement (ISABEE), facilite l’inscription des candidats en ligne.",
+        "about_church": "Apropos de ISABEE",
+        "quick_links": "Liens rapides",
+        "our_address": "Notre adresse",
+        "connect": "Connectes toi",
+        "all_right_reserved": "Tous droits réservés"
+    },
+    "departement": {
+        "label": "Departements",
+        "fsba": "Sciences Fondamentales de Base et Appliquées",
+        "aesh": "Agriculture, Elevage et Sciences Halieutiques",
+        "erpe": "Energies Renouvelables et Performance Energétique",
+        "esva": "Economie, Sociologie Rurale et Vulgarisation Agricole",
+        "fstb": "Foresterie, Sciences et Technologies du Bois",
+        "gh": "Génie de l’Habitat",
+        "gr": "Génie Rural",
+        "hste": "Hydraulique, Sciences et Technologies de l’Eau",
+        "mc": "Météorologie et Climatologie",
+        "se": "Sciences de l’Environnement"
+    },
+    "infor_exam_session": "Informations sur le concours",
+    "infor_personnelle": "Informations personnelles",
+    "infor_diplome_requi": "Informations sur les diplômes",
+    "concours": {
+        "label": "Concours d'Entrée",
+        "admission": "Conditions d'Admission",
+        "communique": "Communiqué",
+        "inscription": "Formulaire d'Inscription",
+        "results": "Résultats",
+        "first year": "Première année",
+        "second year": "Deuxième année",
+        "third year": "Troisième année",
+        "level": {
+            "title": "Niveau",
+            "select": "Veuillez sélectionner le niveau",
+            "premiere": "Première année",
+            "deuxieme": "Deuxième année",
+            "troisieme": "Troisième année"
+        },
+        "langue": {
+            "title": "Langue d'écriture",
+            "select": "Veuillez sélectionner la langue",
+            "french": "Français",
+            "english": "Anglais"
+        },
+        "speciality": "Département",
+        "centres": "Centre d'examen",
+        "nbAttempt": "Combien de fois avez-vous composé ce concours?",
+        "divisionOrigin": "Département d'origine",
+        "parentsPhones": "Contact de l'un des parents"
+    }
+}
