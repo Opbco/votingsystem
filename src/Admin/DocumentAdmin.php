@@ -27,9 +27,8 @@ final class DocumentAdmin extends AbstractAdmin
     {
         $filter
             ->add('id')
-            ->add('mimeType', null, ['label'=>'Mime Type'])
-            ->add('fileName', null, ['label'=>'Name of the document'])
-            ;
+            ->add('mimeType', null, ['label' => 'Mime Type'])
+            ->add('fileName', null, ['label' => 'Name of the document']);
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -37,11 +36,11 @@ final class DocumentAdmin extends AbstractAdmin
         $list
             ->add('id')
             ->add('fileName', FieldDescriptionInterface::TYPE_STRING, [
-                'label'=>'Name of the document',
-                'template' => '@SonataAdmin/CRUD/list_file.html.twig',
+                'label' => 'Name of the document',
+                'template' => '@SonataAdmin/CRUD/list_image.html.twig',
             ])
-            ->add('mimeType', null, ['label'=>'Mime Type'])
-            ->add('updated', null, ['label'=>'Last Modified'])
+            ->add('mimeType', null, ['label' => 'Mime Type'])
+            ->add('updated', null, ['label' => 'Last Modified'])
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -62,7 +61,7 @@ final class DocumentAdmin extends AbstractAdmin
         if ($doc && ($webPath = $doc->getFileWebPath())) {
             $fullPath = $doc->getFileAbsolutePath();
             // add a 'help' option containing the preview's img tag
-            $fileFormOptions['help'] = is_file($fullPath.'') ? '<a target="_blank" style="display:block;margin-top:-3rem;" href="' . $webPath . '">'.$doc->getFileName().'</a>' : 'document unavailable';
+            $fileFormOptions['help'] = is_file($fullPath . '') ? '<img style="max-width:100%; width:200px; aspect-ratio:1; object-fit:contain;" src="' . $webPath . '" class="admin-preview"/>' : 'picture unavailable';
             $fileFormOptions['help_html'] = true;
         }
         $form
@@ -90,9 +89,8 @@ final class DocumentAdmin extends AbstractAdmin
     {
         $show
             ->add('id')
-            ->add('fileName', 'file', ['label'=>'Nom document', 'template'=>'@SonataAdmin/CRUD/base_show_file.html.twig'])
-            ->add('mimeType', null, ['label'=>'Mime Type'])
-            ->add('updated', null, ['label'=>'Last Modified'])
-            ;
+            ->add('fileName', 'file', ['label' => 'Nom document', 'template' => '@SonataAdmin/CRUD/base_show_image.html.twig'])
+            ->add('mimeType', null, ['label' => 'Mime Type'])
+            ->add('updated', null, ['label' => 'Last Modified']);
     }
 }

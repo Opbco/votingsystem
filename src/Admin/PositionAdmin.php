@@ -4,31 +4,26 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
-use App\Entity\Continent;
-use App\Entity\Country;
+use App\Entity\Position;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-final class CountryAdmin extends AbstractAdmin
+final class PositionAdmin extends AbstractAdmin
 {
-
     public function toString(object $object): string
     {
-        return $object instanceof Country
-            ? $object->getName()
-            : 'Country'; // shown in the breadcrumb on the create view
+        return $object instanceof Position
+            ? 'Position' . $object->getName()
+            : 'Position'; // shown in the breadcrumb on the create view
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('id')
-            ->add('name')
-            ;
+            ->add('name');
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -36,7 +31,6 @@ final class CountryAdmin extends AbstractAdmin
         $list
             ->add('id')
             ->add('name')
-            ->add('continent', null, ['label'=>'continent'])
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -49,20 +43,13 @@ final class CountryAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            ->add('name')
-            ->add('continent', ModelListType::class, [
-                'class' => Continent::class,
-                'label' => "Continent",
-                'btn_delete' => false,
-            ]);
+            ->add('name');
     }
 
     protected function configureShowFields(ShowMapper $show): void
     {
         $show
             ->add('id')
-            ->add('name')
-            ->add('continent.name', null, ['label'=>'continent'])
-            ;
+            ->add('name');
     }
 }

@@ -16,4 +16,24 @@ class User extends BaseUser
     #[ORM\GeneratedValue]
     #[ORM\Column]
     protected ?int $id = null;
+
+    #[ORM\OneToOne(mappedBy: 'account', cascade: ['persist', 'remove'])]
+    private ?Member $member = null;
+
+    public function getMember(): ?Member
+    {
+        return $this->member;
+    }
+
+    public function setMember(Member $member): self
+    {
+        // set the owning side of the relation if necessary
+        if ($member->getAccount() !== $this) {
+            $member->setAccount($this);
+        }
+
+        $this->member = $member;
+
+        return $this;
+    }
 }

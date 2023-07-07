@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Membre;
+use App\Entity\Member;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Membre>
+ * @extends ServiceEntityRepository<Member>
  *
- * @method Membre|null find($id, $lockMode = null, $lockVersion = null)
- * @method Membre|null findOneBy(array $criteria, array $orderBy = null)
- * @method Membre[]    findAll()
- * @method Membre[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Member|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Member|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Member[]    findAll()
+ * @method Member[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MembreRepository extends ServiceEntityRepository
+class MemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Membre::class);
+        parent::__construct($registry, Member::class);
     }
 
-    public function save(Membre $entity, bool $flush = false): void
+    public function save(Member $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class MembreRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Membre $entity, bool $flush = false): void
+    public function remove(Member $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class MembreRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Membre[] Returns an array of Membre objects
+//     * @return Member[] Returns an array of Member objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class MembreRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Membre
+//    public function findOneBySomeField($value): ?Member
 //    {
 //        return $this->createQueryBuilder('m')
 //            ->andWhere('m.exampleField = :val')

@@ -5,17 +5,9 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="FxQmM7v" resname="Personnel">
-        <source>Personnel</source>
-        <target>Personnel</target>
-      </trans-unit>
-      <trans-unit id="IbERy.5" resname="Default">
+    <trans-unit id="IbERy.5" resname="Default">
         <source>Default</source>
         <target>Default</target>
-      </trans-unit>
-      <trans-unit id="9Ord4ps" resname="Matricule">
-        <source>Matricule</source>
-        <target>Matricule</target>
       </trans-unit>
       <trans-unit id="ssEkU20" resname="Nom">
         <source>Nom</source>
@@ -29,25 +21,9 @@
         <source>Genre</source>
         <target>Gender</target>
       </trans-unit>
-      <trans-unit id="fhsNVkH" resname="Account">
+      <trans-unit id="2s1HYZp" resname="Compte">
         <source>Account</source>
         <target>Account</target>
-      </trans-unit>
-      <trans-unit id="kJc3knw" resname="Informations Personnelles">
-        <source>Informations Personnelles</source>
-        <target>Personal information</target>
-      </trans-unit>
-      <trans-unit id="2s1HYZp" resname="Compte">
-        <source>Compte</source>
-        <target>Account</target>
-      </trans-unit>
-      <trans-unit id="PRykIbm" resname="Personnel List">
-        <source>Personnel List</source>
-        <target>List of personnel</target>
-      </trans-unit>
-      <trans-unit id="NsY9OQr" resname="Personnel Create">
-        <source>Personnel Create</source>
-        <target>Create a personnel</target>
       </trans-unit>
     </body>
   </file>

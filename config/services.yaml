@@ -47,77 +47,6 @@ services:
   # please note that last definitions always *replace* previous ones
 
   #sonata admin services
-  admin.continent:
-    class: App\Admin\ContinentAdmin
-    calls:
-      - [setTranslationDomain, ["App"]]
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\Continent,
-          controller: ~,
-          manager_type: orm,
-          icon: "fas fa-location-arrow",
-          group: Localisation,
-          label: Continents,
-        }
-
-  admin.country:
-    class: App\Admin\CountryAdmin
-    calls:
-      - [setTranslationDomain, ["App"]]
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\Country,
-          controller: ~,
-          manager_type: orm,
-          group: Localisation,
-          label: Countries,
-        }
-
-  admin.state:
-    class: App\Admin\StateAdmin
-    calls:
-      - [setTranslationDomain, ["App"]]
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\State,
-          controller: ~,
-          manager_type: orm,
-          group: Localisation,
-          label: States,
-        }
-
-  admin.departement:
-    class: App\Admin\DepartementAdmin
-    calls:
-      - [setTranslationDomain, ["App"]]
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\Departement,
-          controller: ~,
-          manager_type: orm,
-          group: Localisation,
-          label: Divisions,
-        }
-
-  admin.sub_division:
-    class: App\Admin\SubDivisionAdmin
-    calls:
-      - [setTranslationDomain, ["App"]]
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\SubDivision,
-          controller: ~,
-          manager_type: orm,
-          group: Localisation,
-          label: SubDivision,
-        }
-
   admin.document:
     class: App\Admin\DocumentAdmin
     calls:
@@ -128,97 +57,52 @@ services:
           model_class: App\Entity\Document,
           controller: ~,
           manager_type: orm,
-          group: Structures,
-          label: Documents,
+          group: Members,
+          label: Documents (Pictures),
         }
 
-  admin.membre:
-    class: App\Admin\MembreAdmin
+  admin.batch:
+    class: App\Admin\BatchAdmin
     calls:
       - [setTranslationDomain, ["App"]]
     tags:
       - {
           name: sonata.admin,
-          model_class: App\Entity\Membre,
+          model_class: App\Entity\Batch,
           controller: ~,
           manager_type: orm,
-          group: Personnels,
-          icon: "fas fa-people-arrows",
-          label: Membres,
+          group: Members,
+          label: Batchs,
         }
+
+  admin.member:
+    class: App\Admin\MemberAdmin
+    calls:
+      - [setTranslationDomain, ["App"]]
+    tags:
+      - {
+          name: sonata.admin,
+          model_class: App\Entity\Member,
+          controller: ~,
+          manager_type: orm,
+          group: Members,
+          icon: "fas fa-people-arrows",
+          label: Members List,
+        }
+
+  admin.position:
+      class: App\Admin\PositionAdmin
+      tags:
+          - { name: sonata.admin, model_class: App\Entity\Position, controller: ~, manager_type: orm, group: Voting, label: Positions }
+
+  admin.voting_session:
+      class: App\Admin\VotingSessionAdmin
+      tags:
+          - { name: sonata.admin, model_class: App\Entity\VotingSession, controller: ~, manager_type: orm, group: Voting, label: Sessions }
+      calls:
+            - [addChild, ['@admin.candidat', 'session']]
 
   admin.candidat:
-    class: App\Admin\CandidatAdmin
-    calls:
-      - [setTranslationDomain, ["App"]]
-      - [addChild, ["@admin.candidatconcours", "candidat"]]
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\Candidat,
-          controller: ~,
-          manager_type: orm,
-          group: Concours,
-          icon: "fas fa-address-card",
-          label: Candidats,
-        }
-  
-  admin.candidatconcours:
-    class: App\Admin\CandidatConcoursAdmin
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\CandidatConcours,
-          controller: ~,
-          manager_type: orm,
-          group: Concours,
-          label: Candidats & Concours,
-        }
-
-  admin.examination:
-    class: App\Admin\ExaminationAdmin
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\Examination,
-          controller: ~,
-          manager_type: orm,
-          group: Concours,
-          label: Examinations,
-        }
-  
-  admin.examcenter:
-    class: App\Admin\ExamCenterAdmin
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\ExamCenter,
-          controller: ~,
-          manager_type: orm,
-          group: Concours,
-          label: Examination Centers,
-        }
-  
-  admin.diploma:
-    class: App\Admin\DiplomaAdmin
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\Diploma,
-          controller: ~,
-          manager_type: orm,
-          group: Concours,
-          label: Diplomas,
-        }
-  
-  admin.speciality:
-    class: App\Admin\SpecialityAdmin
-    tags:
-      - {
-          name: sonata.admin,
-          model_class: App\Entity\Speciality,
-          controller: ~,
-          manager_type: orm,
-          group: Concours,
-          label: Specialities,
-        }
+      class: App\Admin\CandidatAdmin
+      tags:
+          - { name: sonata.admin, model_class: App\Entity\Candidat, controller: ~, manager_type: orm, group: Voting, label: Candidats }

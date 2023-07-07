@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Membre;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\UsersAuthenticator;
@@ -54,7 +53,6 @@ class RegistrationController extends AbstractController
     public function api_register(Request $request, UserPasswordHasherInterface $userPasswordHasher, SerializerInterface $serializer, EntityManagerInterface $entityManager): JsonResponse
     {
         try {
-            $membre = $serializer->deserialize($request->getContent(), Membre::class, 'json');
             $user = $serializer->deserialize($request->getContent(), User::class, 'json');
 
             $user->setPassword(
@@ -66,11 +64,6 @@ class RegistrationController extends AbstractController
 
             $user->setEnabled(true);
             $entityManager->persist($user);
-            $membre->setAccount($user);
-            $membre->setAddress("EPC");
-            $membre->setIsFeatured(0);
-
-            $entityManager->persist($membre);
             $entityManager->flush();
 
             $jsonUser = $serializer->serialize($user, 'json', ['groups' => 'user:info']);

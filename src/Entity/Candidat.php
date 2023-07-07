@@ -2,105 +2,68 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CandidatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinTable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CandidatRepository::class)]
+#[ApiResource]
+#[UniqueEntity(
+    fields: ['member', 'session'],
+    message: 'This member is already candidat',
+)]
 class Candidat
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["candidate:list", "candidatConcour"])]
+    #[Groups(["candidat.list", "vote.list"])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $firstName = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[Groups(["candidat.list"])]
+    #[Assert\Type('datetime')]
+    private ?\DateTimeInterface $date_created = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $lastName = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\Type('datetime')]
+    private ?\DateTimeInterface $dateUpdated = null;
 
-    #[ORM\Column(length: 20)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $gender = null;
+    #[ORM\Column(options: ['default' => 0])]
+    #[Groups(["candidat.list"])]
+    private ?int $numberVoter = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?\DateTimeInterface $dob = null;
-
-    #[ORM\Column(length: 255)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $pob = null;
-
-    #[ORM\Column(length: 255)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $nationality = null;
+    #[ORM\ManyToOne(inversedBy: 'candidats')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["candidat.list", "vote.list"])]
+    private ?Member $member = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?Departement $divisionOrigin = null;
+    #[Groups(["candidat.list", "vote.list"])]
+    private ?Position $position = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $email = null;
+    #[ORM\ManyToOne(inversedBy: 'candidats')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["candidat.list"])]
+    private ?VotingSession $session = null;
 
-    #[ORM\Column(length: 15, nullable: true)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    #[Assert\Regex(
-        pattern: '/^237[0-9]{9}+$/i',
-        htmlPattern: '^(237[0-9]{9})$'
-    )]
-    private ?string $phone = null;
+    #[ORM\Column]
+    #[Groups(["candidat.list"])]
+    private ?bool $status = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $fatherName = null;
-
-    #[ORM\Column(length: 255)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $motherName = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $parentsPhones = null;
-
-    #[ORM\Column(length: 255)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?string $bp = null;
-
-    #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: CandidatConcours::class, orphanRemoval: true)]
-    private Collection $concours;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    private ?Document $avatar = null;
-
-    #[ORM\Column(length: 20, nullable: true)]
-    #[Groups(["candidate:list", "candidatConcour"])]
-    #[Assert\Regex(
-        pattern: '/^237[0-9]{9}+$/i',
-        htmlPattern: '^(237[0-9]{9})$'
-    )]
-    private ?string $whatsapp = null;
-
-    #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Diploma::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
-    #[Groups(["candidatConcour"])]
-    private Collection $diplomas;
+    #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Vote::class, orphanRemoval: true)]
+    private Collection $votes;
 
     public function __construct()
     {
-        $this->concours = new ArrayCollection();
-        $this->diplomas = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,250 +71,125 @@ class Candidat
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getDateCreated(): ?\DateTimeInterface
     {
-        return $this->firstName;
+        return $this->date_created;
     }
 
-    public function setFirstName(?string $firstName): self
+    public function setDateCreated(\DateTimeInterface $date_created): self
     {
-        $this->firstName = $firstName;
+        $this->date_created = $date_created;
 
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getDateUpdated(): ?\DateTimeInterface
     {
-        return $this->lastName;
+        return $this->dateUpdated;
     }
 
-    public function setLastName(string $lastName): self
+    public function setDateUpdated(\DateTimeInterface $dateUpdated): self
     {
-        $this->lastName = $lastName;
+        $this->dateUpdated = $dateUpdated;
 
         return $this;
     }
 
-    public function getName(): ?string
+    public function getNumberVoter(): ?int
     {
-        return $this->firstName . ' ' . $this->lastName;
+        return $this->numberVoter;
     }
 
-    public function getGender(): ?string
+    public function setNumberVoter(int $numberVoter): self
     {
-        return $this->gender;
-    }
-
-    public function setGender(string $gender): self
-    {
-        $this->gender = $gender;
+        $this->numberVoter = $numberVoter;
 
         return $this;
     }
 
-    public function getDob(): ?\DateTimeInterface
+    public function IncNumberVoter(): self
     {
-        return $this->dob;
+        $this->numberVoter += 1;
+        return $this;
     }
 
-    public function setDob(\DateTimeInterface $dob): self
+    public function getMember(): ?Member
     {
-        $this->dob = $dob;
+        return $this->member;
+    }
+
+    public function setMember(?Member $member): self
+    {
+        $this->member = $member;
 
         return $this;
     }
 
-    public function getPob(): ?string
+    public function getPosition(): ?Position
     {
-        return $this->pob;
+        return $this->position;
     }
 
-    public function setPob(string $pob): self
+    public function setPosition(?Position $position): self
     {
-        $this->pob = $pob;
+        $this->position = $position;
 
         return $this;
     }
 
-    public function getNationality(): ?string
+    public function getSession(): ?VotingSession
     {
-        return $this->nationality;
+        return $this->session;
     }
 
-    public function setNationality(string $nationality): self
+    public function setSession(?VotingSession $session): self
     {
-        $this->nationality = $nationality;
+        $this->session = $session;
 
         return $this;
     }
 
-    public function getDivisionOrigin(): ?Departement
+    public function isStatus(): ?bool
     {
-        return $this->divisionOrigin;
+        return $this->status;
     }
 
-    public function setDivisionOrigin(?Departement $divisionOrigin): self
+    public function setStatus(bool $status): self
     {
-        $this->divisionOrigin = $divisionOrigin;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getFatherName(): ?string
-    {
-        return $this->fatherName;
-    }
-
-    public function setFatherName(?string $fatherName): self
-    {
-        $this->fatherName = $fatherName;
-
-        return $this;
-    }
-
-    public function getMotherName(): ?string
-    {
-        return $this->motherName;
-    }
-
-    public function setMotherName(string $motherName): self
-    {
-        $this->motherName = $motherName;
-
-        return $this;
-    }
-
-    public function getParentsPhones(): ?string
-    {
-        return $this->parentsPhones;
-    }
-
-    public function setParentsPhones(?string $parentsPhones): self
-    {
-        $this->parentsPhones = $parentsPhones;
-
-        return $this;
-    }
-
-    public function getBp(): ?string
-    {
-        return $this->bp;
-    }
-
-    public function setBp(string $bp): self
-    {
-        $this->bp = $bp;
-
-        return $this;
-    }
-
-    public function getAvatar(): ?Document
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?Document $avatar): self
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CandidatConcours>
-     */
-    public function getConcours(): Collection
-    {
-        return $this->concours;
-    }
-
-    public function addConcour(CandidatConcours $concour): self
-    {
-        if (!$this->concours->contains($concour)) {
-            $this->concours->add($concour);
-            $concour->setCandidat($this);
-        }
-
-        return $this;
-    }
-
-    public function removeConcour(CandidatConcours $concour): self
-    {
-        if ($this->concours->removeElement($concour)) {
-            // set the owning side to null (unless already changed)
-            if ($concour->getCandidat() === $this) {
-                $concour->setCandidat(null);
-            }
-        }
+        $this->status = $status;
 
         return $this;
     }
 
     public function __toString()
     {
-        return $this->firstName . ' ' . $this->lastName;
-    }
-
-    public function getWhatsapp(): ?string
-    {
-        return $this->whatsapp;
-    }
-
-    public function setWhatsapp(?string $whatsapp): self
-    {
-        $this->whatsapp = $whatsapp;
-
-        return $this;
+        return $this->session . ' ' . $this->member . ' ' . $this->position;
     }
 
     /**
-     * @return Collection<int, Diploma>
+     * @return Collection<int, Vote>
      */
-    public function getDiplomas(): Collection
+    public function getVotes(): Collection
     {
-        return $this->diplomas;
+        return $this->votes;
     }
 
-    public function addDiploma(Diploma $diploma): self
+    public function addVote(Vote $vote): self
     {
-        if (!$this->diplomas->contains($diploma)) {
-            $this->diplomas->add($diploma);
-            $diploma->setCandidat($this);
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+            $vote->setCandidat($this);
         }
 
         return $this;
     }
 
-    public function removeDiploma(Diploma $diploma): self
+    public function removeVote(Vote $vote): self
     {
-        if ($this->diplomas->removeElement($diploma)) {
+        if ($this->votes->removeElement($vote)) {
             // set the owning side to null (unless already changed)
-            if ($diploma->getCandidat() === $this) {
-                $diploma->setCandidat(null);
+            if ($vote->getCandidat() === $this) {
+                $vote->setCandidat(null);
             }
         }
 

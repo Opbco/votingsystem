@@ -2,7 +2,7 @@
 
 namespace App\Form\DataTransformer;
 
-use App\Form\CandidatureStatus;
+use App\Form\Type\CandidatureStatus;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 

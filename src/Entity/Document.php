@@ -17,11 +17,11 @@ class Document
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["getMembres", "document"])]
+    #[Groups(["membre.list", "document.list", "candidat.list", "vote.list"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(["getMembres", "document"])]
+    #[Groups(["membre.list", "document.list", "candidat.list", "vote.list"])]
     private ?string $fileName = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -98,6 +98,11 @@ class Document
     public function getFileName(): ?string
     {
         return $this->fileName;
+    }
+
+    public function __toString()
+    {
+        return $this->getFileWebPath();
     }
 
     public function setFileName(string $fileName): self

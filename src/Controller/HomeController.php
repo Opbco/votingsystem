@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Membre;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,18 +31,6 @@ class HomeController extends AbstractController
         return $this->render(
             'home/api.html.twig'
         );
-    }
-
-
-    #[Route('/{_locale<%locales%>}/print/card/{id}', name: 'app_id_card')]
-    public function card(int $id, Membre $personnel, SerializerInterface $serializer): Response
-    {
-        $spersonnel = $serializer->serialize($personnel, 'json', ['groups' => 'getMembres']);
-
-        return $this->render('Card/index.html.twig', [
-            'personnel' => $spersonnel,
-            'id' => $id
-        ]);
     }
 
     #[Route('/contactsending', name: 'app_contact_email_us', methods: ['POST'])]
